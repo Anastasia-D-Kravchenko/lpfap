@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: lpfap
+  datasource:
+    url: jdbc:h2:mem:lpfapdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    open-in-view: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  web:
+    resources:
+      add-mappings: true
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 3MB
+
+server:
+  port: 8080
+
+app:
+  jwt:
+    secret: ${LPFAP_JWT_SECRET:dev-only-secret-change-me-in-production-must-be-at-least-256-bits-long}
+    expiration-ms: 86400000
+  upload:
+    dir: uploads
+
+logging:
+  level:
+    pl.edu.pjwstk.lpfap: INFO
+    org.springframework.security: WARN

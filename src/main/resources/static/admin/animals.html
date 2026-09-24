@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Admin · Animals · LPFAP</title>
+  <link rel="icon" type="image/avif" href="/img/pet-logo-design-paw-vector-animal-shop-business_53876-136741.avif">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+<nav id="topNav"></nav>
+
+<div class="admin-layout">
+  <div id="adminSidebar"></div>
+  <div class="admin-content">
+    <div class="admin-page-header">
+      <div><div class="admin-page-title">Animal Management</div><div class="admin-page-sub">Add, edit, and manage pet listings for the portal.</div></div>
+      <button class="btn btn-primary" onclick="openAnimalModal()">+ Add New Animal</button>
+    </div>
+    <div class="card-panel">
+      <div style="padding:14px 18px;border-bottom:1px solid #f1f5f9;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <input class="form-input" style="flex:1;min-width:200px" id="anSearch" placeholder="Search by name, ID, or breed..." oninput="filterAdminAnimals()">
+        <select class="filter-select" id="anStatusFilter" onchange="filterAdminAnimals()" style="min-width:160px">
+          <option value="">All statuses</option>
+          <option value="AVAILABLE">Available</option>
+          <option value="FOSTERED">Fostered</option>
+          <option value="ADOPTED">Adopted</option>
+          <option value="ARCHIVED">Archived</option>
+        </select>
+        <button class="btn btn-yellow btn-sm" onclick="filterAdminAnimals()">Find</button>
+      </div>
+      <div id="adminAnimalTable"><div class="loading"><div class="spinner"></div></div></div>
+    </div>
+  </div>
+</div>
+
+<div id="animalModal" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header"><h3 id="animalModalTitle">Add New Animal</h3></div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Name *</label><input class="form-input" id="anName" placeholder="Buddy"></div>
+        <div class="form-group"><label class="form-label">Species *</label>
+          <select class="form-select" id="anSpecies">
+            <option value="DOG">Dog</option>
+            <option value="CAT">Cat</option>
+            <option value="RABBIT">Rabbit</option>
+            <option value="BIRD">Bird</option>
+            <option value="HAMSTER">Hamster</option>
+            <option value="GUINEA_PIG">Guinea pig</option>
+            <option value="FERRET">Ferret</option>
+            <option value="REPTILE">Reptile</option>
+            <option value="FISH">Fish</option>
+            <option value="HORSE">Horse</option>
+            <option value="OTHER">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Breed</label><input class="form-input" id="anBreed" placeholder="Golden Retriever"></div>
+        <div class="form-group"><label class="form-label">Age (months) *</label><input class="form-input" id="anAge" type="number" min="0" placeholder="24"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Sex *</label>
+          <select class="form-select" id="anSex">
+            <option value="MALE">Male</option><option value="FEMALE">Female</option><option value="UNKNOWN">Unknown</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Primary photo (URL)</label>
+          <input class="form-input" id="anPhoto" placeholder="Paste a URL, upload, or pick below" oninput="updateAnPhotoPreview()">
+        </div>
+      </div>
+      <div class="form-group">
+        <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">
+          <img id="anPhotoPreview" alt=""
+               style="width:96px;height:96px;border-radius:10px;object-fit:cover;background:#f1f5f9;border:1px solid #e2e8f0">
+          <div style="flex:1;min-width:240px">
+            <div id="anUploadRow" style="display:none;margin-bottom:8px">
+              <label class="btn btn-outline btn-sm" style="cursor:pointer;margin:0">
+                📁 Upload photo to gallery
+                <input id="anPhotoFile" type="file" accept="image/*"
+                       style="display:none" onchange="uploadAnimalPhoto(event)">
+              </label>
+              <span id="anUploadStatus" style="font-size:12px;color:#64748b;margin-left:10px"></span>
+              <div style="font-size:11px;color:#94a3b8;margin-top:4px">Save the animal first; then you can upload extra photos.</div>
+            </div>
+            <div style="font-size:11px;color:#94a3b8;margin-bottom:6px">Or pick a photo from our gallery:</div>
+            <div id="anPhotoPicker" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+          </div>
+        </div>
+        <div id="anGallery" style="margin-top:14px"></div>
+      </div>
+      <div class="form-group" style="margin-top:4px"><label class="form-label">Medical Status</label><input class="form-input" id="anMedical" placeholder="Vaccinated & Neutered"></div>
+      <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="anDesc" rows="3" placeholder="Describe the animal's personality..."></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('animalModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveAnimal()">Save Animal</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/core.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/page-admin-shell.js"></script>
+<script src="/js/page-admin-animals.js"></script>
+</body>
+</html>

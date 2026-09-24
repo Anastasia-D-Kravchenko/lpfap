@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>My Applications · LPFAP</title>
+  <link rel="icon" type="image/avif" href="/img/pet-logo-design-paw-vector-animal-shop-business_53876-136741.avif">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+<nav id="topNav"></nav>
+
+<div class="inner-page">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+    <div id="dashGreeting" class="page-heading"></div>
+  </div>
+  <div class="page-subheading">Track the status of your pet applications and manage your profile.</div>
+  <div class="stats-row" id="dashStats"></div>
+  <div class="card-panel">
+    <div class="card-panel-header">
+      <div class="card-panel-title">My Applications</div>
+      <div class="legend">
+        <span><span class="dot dot-pending"></span>Pending</span>
+        <span><span class="dot dot-approved"></span>Approved</span>
+        <span><span class="dot dot-rejected"></span>Rejected</span>
+      </div>
+    </div>
+    <div id="myAppsTable"></div>
+  </div>
+  <div style="text-align:center;margin-top:8px">
+    <a class="btn btn-outline" href="/">🐾 Browse More Animals</a>
+  </div>
+</div>
+
+<script src="/js/core.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/page-dashboard.js"></script>
+</body>
+</html>

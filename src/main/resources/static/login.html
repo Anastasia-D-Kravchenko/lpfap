@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Login · LPFAP</title>
+  <link rel="icon" type="image/avif" href="/img/pet-logo-design-paw-vector-animal-shop-business_53876-136741.avif">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/app.css">
+  <style>
+    .auth-wrap{max-width:420px;margin:60px auto;padding:0 20px}
+    .auth-card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:32px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+    .auth-title{font-size:22px;font-weight:800;color:#1e293b;margin-bottom:6px;text-align:center}
+    .auth-sub{font-size:13px;color:#64748b;text-align:center;margin-bottom:22px}
+  </style>
+</head>
+<body>
+
+<nav id="topNav"></nav>
+
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-title">Welcome to LPFAP 🐾</div>
+    <div class="auth-sub">Log in or create an account.</div>
+
+    <div class="auth-tabs">
+      <div class="auth-tab active" id="tabLogin" onclick="switchTab('login')">Login</div>
+      <div class="auth-tab" id="tabRegister" onclick="switchTab('register')">Create Account</div>
+    </div>
+
+    <div id="loginForm">
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input class="form-input" id="loginEmail" type="email" placeholder="your@email.com" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" id="loginPassword" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <div id="loginError" class="form-error" style="margin-bottom:12px"></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="doLogin()">Login</button>
+      <p style="text-align:center;margin-top:14px;font-size:13px;color:#64748b">No account?
+        <span style="color:#1d4ed8;cursor:pointer;font-weight:600" onclick="switchTab('register')">Register here</span></p>
+    </div>
+
+    <div id="registerForm" style="display:none">
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input class="form-input" id="regName" type="text" placeholder="Jan Kowalski">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" id="regEmail" type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input class="form-input" id="regPhone" type="text" placeholder="+48 123 456 789">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password <span style="font-weight:400;color:#94a3b8">(min. 8 chars)</span></label>
+        <input class="form-input" id="regPassword" type="password" placeholder="••••••••">
+      </div>
+      <div id="regError" class="form-error" style="margin-bottom:12px"></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="doRegister()">Create Account</button>
+      <p style="text-align:center;margin-top:14px;font-size:13px;color:#64748b">Have an account?
+        <span style="color:#1d4ed8;cursor:pointer;font-weight:600" onclick="switchTab('login')">Login</span></p>
+    </div>
+  </div>
+</div>
+
+<script src="/js/core.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/page-login.js"></script>
+</body>
+</html>

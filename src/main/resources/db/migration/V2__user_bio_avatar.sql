@@ -1,0 +1,2 @@
+ALTER TABLE users ADD COLUMN bio        VARCHAR(2000);
+ALTER TABLE users ADD COLUMN avatar_url VARCHAR(500);

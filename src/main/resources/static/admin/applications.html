@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Admin · Applications · LPFAP</title>
+  <link rel="icon" type="image/avif" href="/img/pet-logo-design-paw-vector-animal-shop-business_53876-136741.avif">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+<nav id="topNav"></nav>
+
+<div class="admin-layout">
+  <div id="adminSidebar"></div>
+  <div class="admin-content">
+    <div class="admin-page-header">
+      <div><div class="admin-page-title">Application Review</div><div class="admin-page-sub">Review and process adoption and foster requests.</div></div>
+    </div>
+    <div class="card-panel" style="padding:16px 18px;margin-bottom:16px">
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+        <div class="filter-group"><div class="filter-label">Status</div>
+          <select class="filter-select" id="appFilterStatus" onchange="onStatusChange()">
+            <option value="">All</option>
+            <option value="PENDING">Pending</option>
+            <option value="APPROVED">Approved</option>
+            <option value="REJECTED">Rejected</option>
+            <option value="WITHDRAWN">Withdrawn</option>
+            <option value="RETURN_REQUESTED">Return requested</option>
+            <option value="RETURNED">Returned</option>
+          </select>
+        </div>
+        <div class="filter-group"><div class="filter-label">Type</div>
+          <select class="filter-select" id="appFilterType" onchange="renderAdminApps()">
+            <option value="">All</option><option value="ADOPTION">Adoption</option><option value="FOSTER">Foster</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="card-panel">
+      <div id="adminAppTable"><div class="loading"><div class="spinner"></div></div></div>
+      <div style="padding:12px 18px;font-size:12px;color:#94a3b8;border-top:1px solid #f1f5f9">
+        <span style="background:#dcfce7;color:#16a34a;padding:2px 8px;border-radius:5px;margin-right:8px;font-weight:600">● APPROVE</span>
+        <span style="background:#fee2e2;color:#dc2626;padding:2px 8px;border-radius:5px;font-weight:600">● REJECT</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="appDetailModal" class="modal-overlay hidden">
+  <div class="modal" style="max-width:680px">
+    <div class="modal-header">
+      <h3 id="appDetailTitle">Application Detail</h3>
+      <p id="appDetailSub">—</p>
+    </div>
+    <div class="modal-body">
+
+      <div id="appDetailApplicantCard"
+           style="display:flex;gap:14px;align-items:flex-start;padding:14px;background:#f8fafc;border-radius:12px;cursor:pointer;margin-bottom:14px"
+           onclick="viewApplicantFromApp()">
+        <img id="appDetailApplicantAvatar" alt=""
+             style="width:64px;height:64px;border-radius:50%;object-fit:cover;background:#e2e8f0;border:1px solid #e2e8f0">
+        <div style="flex:1;min-width:0">
+          <div id="appDetailApplicant" style="font-size:16px;font-weight:700;color:#1e293b">—</div>
+          <div id="appDetailEmail" style="font-size:13px;color:#64748b">—</div>
+          <div id="appDetailApplicantPhone" style="font-size:12px;color:#94a3b8;margin-top:2px"></div>
+          <div id="appDetailApplicantBio" style="font-size:12px;color:#475569;margin-top:6px;white-space:pre-wrap"></div>
+        </div>
+        <div style="font-size:11px;color:#1d4ed8;font-weight:600;align-self:center">View profile →</div>
+      </div>
+
+      <table class="detail-table" style="margin-bottom:14px">
+        <tr><td>Animal</td><td id="appDetailAnimal">—</td></tr>
+        <tr><td>Type</td><td id="appDetailType">—</td></tr>
+        <tr><td>Status</td><td id="appDetailStatus">—</td></tr>
+        <tr><td>Submitted</td><td id="appDetailSubmitted">—</td></tr>
+        <tr><td>Decision</td><td id="appDetailDecision">—</td></tr>
+      </table>
+
+      <div class="detail-desc" style="padding-top:0;border-top:none">
+        <h4>Motivation</h4>
+        <p id="appDetailMotivation" style="white-space:pre-wrap">—</p>
+      </div>
+
+      <div id="appDetailPhotosWrap" style="margin-top:18px;padding-top:14px;border-top:1px solid #f1f5f9;display:none">
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:8px">📸 Photos from applicant</h4>
+        <div id="appDetailPhotos" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+      </div>
+    </div>
+    <div class="modal-footer" id="appDetailFooter">
+      <button class="btn btn-outline" onclick="closeModal('appDetailModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="userProfileModal" class="modal-overlay hidden">
+  <div class="modal" style="max-width:560px">
+    <div class="modal-header">
+      <h3 id="upmName">User</h3>
+      <p id="upmEmail">—</p>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:14px">
+        <img id="upmAvatar" alt=""
+             style="width:96px;height:96px;border-radius:50%;object-fit:cover;background:#f1f5f9;border:1px solid #e2e8f0">
+        <div style="flex:1">
+          <table class="detail-table">
+            <tr><td>Role</td><td id="upmRole">—</td></tr>
+            <tr><td>Phone</td><td id="upmPhone">—</td></tr>
+            <tr><td>Registered</td><td id="upmRegistered">—</td></tr>
+          </table>
+        </div>
+      </div>
+      <div id="upmBioWrap" class="detail-desc" style="padding-top:8px;border-top:1px solid #f1f5f9">
+        <h4>About</h4>
+        <p id="upmBio" style="white-space:pre-wrap">—</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('userProfileModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/core.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/page-admin-shell.js"></script>
+<script src="/js/page-admin-applications.js"></script>
+</body>
+</html>

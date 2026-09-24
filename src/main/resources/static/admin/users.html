@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Admin · Users · LPFAP</title>
+  <link rel="icon" type="image/avif" href="/img/pet-logo-design-paw-vector-animal-shop-business_53876-136741.avif">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+<nav id="topNav"></nav>
+
+<div class="admin-layout">
+  <div id="adminSidebar"></div>
+  <div class="admin-content">
+    <div class="admin-page-header"><div><div class="admin-page-title">User Management</div><div class="admin-page-sub">View registered accounts and manage roles.</div></div></div>
+    <div class="card-panel"><div id="usersTable"><div class="loading"><div class="spinner"></div></div></div></div>
+  </div>
+</div>
+
+<!-- USER DETAIL MODAL (admin) -->
+<div id="userDetailModal" class="modal-overlay hidden">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-header">
+      <h3 id="userDetailName">User</h3>
+      <p id="userDetailEmail">—</p>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;margin-bottom:16px">
+        <img id="userDetailAvatar" alt=""
+             style="width:96px;height:96px;border-radius:50%;object-fit:cover;background:#f1f5f9;border:1px solid #e2e8f0">
+        <div style="flex:1;min-width:240px">
+          <table class="detail-table">
+            <tr><td>Role</td><td id="userDetailRole">—</td></tr>
+            <tr><td>Phone</td><td id="userDetailPhone">—</td></tr>
+            <tr><td>Registered</td><td id="userDetailRegistered">—</td></tr>
+            <tr><td>Applications</td><td id="userDetailApps">—</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="detail-desc" id="userDetailBioWrap" style="padding-top:8px;border-top:1px solid #f1f5f9">
+        <h4>About</h4>
+        <p id="userDetailBio" style="white-space:pre-wrap">—</p>
+      </div>
+      <div style="margin-top:18px;padding-top:14px;border-top:1px solid #f1f5f9">
+        <div style="font-size:13px;font-weight:700;color:#1e293b;margin-bottom:8px">Applications</div>
+        <div id="userDetailAppList"><div class="loading"><div class="spinner"></div></div></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('userDetailModal')">Close</button>
+      <button class="btn btn-primary" id="userDetailRoleBtn">Promote</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/core.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/page-admin-shell.js"></script>
+<script src="/js/page-admin-users.js"></script>
+</body>
+</html>

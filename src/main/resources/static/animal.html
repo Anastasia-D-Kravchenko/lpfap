@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Animal · LPFAP</title>
+  <link rel="icon" type="image/avif" href="/img/pet-logo-design-paw-vector-animal-shop-business_53876-136741.avif">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+<nav id="topNav"></nav>
+
+<div class="container" style="padding-top:24px;padding-bottom:48px">
+  <div class="breadcrumb">
+    <a href="/" style="color:#1d4ed8">Animals</a> › <span id="detailBreadcrumb">Loading...</span>
+  </div>
+  <a class="detail-back" href="/">← Back to listing</a>
+  <div id="detailContent"></div>
+</div>
+
+<div id="appModal" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="appModalTitle">Application</h3>
+      <p id="appModalSub">—</p>
+    </div>
+    <div class="modal-body">
+      <div style="margin-bottom:8px;font-size:11px;font-weight:700;letter-spacing:.06em;color:#64748b;text-transform:uppercase">Application Type</div>
+      <div class="app-type-options">
+        <div class="app-type-opt selected" id="optAdoption" onclick="selectAppType('ADOPTION')">
+          <input type="radio" name="appType" checked>
+          <div><div class="app-type-name">Adoption</div><div class="app-type-sub">Permanent home</div></div>
+        </div>
+        <div class="app-type-opt" id="optFoster" onclick="selectAppType('FOSTER')">
+          <input type="radio" name="appType">
+          <div><div class="app-type-name">Foster</div><div class="app-type-sub">Temporary care</div></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Your Name</label><input class="form-input input-readonly" id="appName" type="text"></div>
+        <div class="form-group"><label class="form-label">Email Address</label><input class="form-input input-readonly" id="appEmail" type="text"></div>
+      </div>
+      <div class="form-group" style="margin-top:4px">
+        <label class="form-label">Phone Number</label>
+        <input class="form-input input-readonly" id="appPhone" type="text" placeholder="—">
+      </div>
+      <div class="form-group">
+        <label class="form-label" style="display:flex;justify-content:space-between">
+          <span>Why do you want to adopt/foster this animal?</span>
+          <span style="font-weight:400;color:#94a3b8;font-size:11px">MIN. 50 CHARS</span>
+        </label>
+        <textarea class="form-textarea" id="appMotivation" rows="4"
+          placeholder="Tell us about your home, experience with pets, and why this animal would be a great fit..."
+          oninput="updateCharCount()"></textarea>
+        <div style="display:flex;justify-content:space-between;margin-top:4px">
+          <span class="form-error" id="appMotivationError"></span>
+          <span class="char-count" id="appCharCount">0 / 50</span>
+        </div>
+      </div>
+
+      <div id="appAfterSubmit" style="display:none;margin-top:18px;padding-top:14px;border-top:1px solid #f1f5f9">
+        <div style="font-size:13px;font-weight:700;color:#1e293b;margin-bottom:6px">
+          📸 Add photos to your application <span style="font-weight:400;color:#94a3b8">(optional)</span>
+        </div>
+        <div style="font-size:12px;color:#64748b;margin-bottom:10px">
+          Photos of your home, family, current pets — anything that helps the shelter get to know you.
+        </div>
+        <label class="btn btn-outline btn-sm" style="cursor:pointer;margin:0">
+          📁 Upload a photo
+          <input type="file" accept="image/*" style="display:none" onchange="uploadApplicationPhoto(event)">
+        </label>
+        <span id="appPhotoStatus" style="font-size:12px;color:#64748b;margin-left:10px"></span>
+        <div id="appPhotoList" style="margin-top:10px"></div>
+      </div>
+    </div>
+    <div class="modal-footer" id="appSubmitFooter">
+      <button class="btn btn-outline" onclick="closeModal('appModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="submitApplication()">Submit Application</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/core.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/page-animal-detail.js"></script>
+</body>
+</html>

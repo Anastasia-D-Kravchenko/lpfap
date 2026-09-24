@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Animals · LPFAP</title>
+  <link rel="icon" type="image/avif" href="/img/pet-logo-design-paw-vector-animal-shop-business_53876-136741.avif">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+<nav id="topNav"></nav>
+
+<div class="container">
+  <div class="filters-bar">
+    <div class="filter-group">
+      <div class="filter-label">Species</div>
+      <select class="filter-select" id="filterSpecies" onchange="onFilterChange()">
+        <option value="">ALL</option>
+        <option value="DOG">Dog</option><option value="CAT">Cat</option>
+        <option value="RABBIT">Rabbit</option><option value="BIRD">Bird</option><option value="OTHER">Other</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">Age</div>
+      <select class="filter-select" id="filterAge" onchange="onFilterChange()">
+        <option value="">ANY</option>
+        <option value="young">Young (&lt;12mo)</option>
+        <option value="adult">Adult (1–5yr)</option>
+        <option value="senior">Senior (5yr+)</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">Search</div>
+      <input class="search-input" id="filterSearch" type="text" placeholder="Search by name or breed..." oninput="onFilterChange()">
+    </div>
+    <button class="btn btn-yellow" onclick="onFilterChange()">Search</button>
+  </div>
+  <div id="animalsGrid" class="animals-grid"></div>
+  <div id="pagination" class="pagination"></div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">LPFAP</div><div style="font-size:13px">Connecting loving homes with pets in need.</div></div>
+    <div class="footer-links"><span>About Us</span><span>Contact</span><span>Privacy Policy</span></div>
+    <div class="footer-copy">© 2026 Local Pet Foster & Adoption Portal. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="/js/core.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/page-animals.js"></script>
+</body>
+</html>
